@@ -1,0 +1,297 @@
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<title>JavaScript Practice Output</title>
+<style>
+body{font-family:Arial;padding:20px}
+p{margin:5px 0}
+</style>
+</head>
+<body>
+
+<h2>JavaScript Task Outputs</h2>
+<div id="output"></div>
+
+<script>
+
+function print(text){
+document.getElementById("output").innerHTML += "<p>"+text+"</p>";
+}
+
+// ---------- 1–10 Type Conversion ----------
+
+//1
+let num1 = Number(prompt("Enter number"));
+print(num1 + 10);
+
+//2
+let a = Number(prompt("Enter first number"));
+let b = Number(prompt("Enter second number"));
+print(a + b);
+
+//3
+let val = prompt("Enter any value");
+print(Boolean(val));
+
+//4
+print(Number("123") * 5);
+
+//5
+print(Number(true));
+print(Number(false));
+
+//6
+let str = prompt("Enter string");
+print(Boolean(str));
+
+//7
+print(Number("100") - Number("50"));
+
+//8
+print(Number(null));
+print(Number(undefined));
+print(Number(""));
+
+//9
+print("10" + 20);
+
+//10
+let num25 = Number("25");
+print(num25 > 20);
+
+
+// ---------- 11–20 If Else ----------
+
+//11
+let age = Number(prompt("Enter age"));
+if(age >= 18){
+print("Eligible to vote");
+}else{
+print("Not eligible");
+}
+
+//12
+let num = Number(prompt("Enter number"));
+if(num >= 0){
+print("Positive");
+}else{
+print("Negative");
+}
+
+//13
+let check = Number(prompt("Enter number"));
+if(check % 2 === 0){
+print("Even");
+}else{
+print("Odd");
+}
+
+//14
+let x = Number(prompt("Enter number1"));
+let y = Number(prompt("Enter number2"));
+let z = Number(prompt("Enter number3"));
+print(Math.max(x,y,z));
+
+//15
+let temp = Number(prompt("Enter temperature"));
+if(temp > 35){
+print("Hot day");
+}else if(temp < 20){
+print("Cold day");
+}else{
+print("Normal weather");
+}
+
+//16
+let marks = Number(prompt("Enter marks"));
+if(marks >= 35){
+print("Pass");
+}else{
+print("Fail");
+}
+
+//17
+let username = prompt("Enter username");
+let password = prompt("Enter password");
+
+if(username==="admin" && password==="1234"){
+print("Login successful");
+}else{
+print("Invalid login");
+}
+
+//18
+let year = Number(prompt("Enter year"));
+if((year%4===0 && year%100!==0) || year%400===0){
+print("Leap year");
+}else{
+print("Not leap year");
+}
+
+//19
+let time = Number(prompt("Enter hour"));
+
+if(time<12){
+print("Morning");
+}else if(time<17){
+print("Afternoon");
+}else if(time<21){
+print("Evening");
+}else{
+print("Night");
+}
+
+//20
+let salary = Number(prompt("Enter salary"));
+
+if(salary>=50000){
+print("Tax "+salary*0.20);
+}else if(salary>=30000){
+print("Tax "+salary*0.10);
+}else{
+print("No tax");
+}
+
+
+// ---------- 21–30 Loops ----------
+
+//21
+for(let i=1;i<=10;i++){
+print(i);
+}
+
+//22
+for(let i=10;i>=1;i--){
+print(i);
+}
+
+//23
+for(let i=2;i<=50;i+=2){
+print(i);
+}
+
+//24
+for(let i=1;i<=50;i+=2){
+print(i);
+}
+
+//25
+let table = Number(prompt("Enter number for table"));
+for(let i=1;i<=10;i++){
+print(table+" x "+i+" = "+table*i);
+}
+
+//26
+let sum=0;
+for(let i=1;i<=100;i++){
+sum+=i;
+}
+print(sum);
+
+//27
+let fact = Number(prompt("Enter number"));
+let result=1;
+for(let i=1;i<=fact;i++){
+result*=i;
+}
+print(result);
+
+//28
+let count=0;
+for(let i=1;i<=100;i++){
+if(i%5===0){
+count++;
+}
+}
+print(count);
+
+//29
+for(let i=1;i<=10;i++){
+print(i*i);
+}
+
+//30 Reverse number
+let number = Number(prompt("Enter number"));
+let rev=0;
+
+while(number>0){
+let digit=number%10;
+rev=rev*10+digit;
+number=Math.floor(number/10);
+}
+print(rev);
+
+
+// ---------- 31–35 Arrays ----------
+
+//31
+let fruits=["apple","banana","orange"];
+for(let f of fruits){
+print(f);
+}
+
+//32
+print(fruits.length);
+
+//33
+let arr=[10,40,25,60,5];
+print(Math.max(...arr));
+
+//34
+let total=0;
+for(let n of arr){
+total+=n;
+}
+print(total);
+
+//35
+let nums=[2,5,8,11,20];
+for(let n of nums){
+if(n%2===0){
+print(n);
+}
+}
+
+
+// ---------- 36–40 Objects ----------
+
+//36
+let person={
+name:"Nani",
+age:23,
+city:"Bengaluru"
+};
+
+for(let key in person){
+print(key+" : "+person[key]);
+}
+
+//37
+print(Object.keys(person).length);
+
+//38
+print("salary" in person);
+
+//39
+for(let key in person){
+print(person[key]);
+}
+
+//40
+let employee={
+name:"Mahesh",
+role:"Developer",
+salary:50000,
+department:"IT"
+};
+
+for(let key in employee){
+print(key+" : "+employee[key]);
+}
+
+</script>
+
+</body>
+</html>
+```
