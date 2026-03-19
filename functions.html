@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>JS Functions Practice</title>
+</head>
+<body>
+
+<script>
+
+// -------- Section 1 --------
+
+//1
+function hello(){ alert("Hello World"); }
+hello();
+
+//2
+function welcome(name){ alert("Welcome " + name); }
+welcome("Mahesh");
+
+//3
+function add(a,b){ return a+b; }
+alert(add(5,3));
+
+//4
+function evenOdd(n){
+if(n%2===0){ return "Even"; } else { return "Odd"; }
+}
+alert(evenOdd(4));
+
+//5
+function square(n){ return n*n; }
+alert(square(5));
+
+//6
+function largest(a,b,c){ return Math.max(a,b,c); }
+alert(largest(3,9,5));
+
+//7
+function user(age=18){ return age; }
+alert(user());
+
+//8
+function fullname(f,l){ return f+" "+l; }
+alert(fullname("Mahesh","Reddy"));
+
+
+// -------- Section 2 --------
+
+//9
+function multiply(a,b,c){ return a*b*c; }
+alert(multiply(2,3,4));
+
+//10
+function scopeDemo(){
+var a=1;
+let b=2;
+const c=3;
+alert(a+" "+b+" "+c);
+}
+scopeDemo();
+
+//11
+function outer(){
+function inner(){ alert("Nested function"); }
+inner();
+}
+outer();
+
+//12
+var globalVar="Global";
+function testGlobal(){ alert(globalVar); }
+testGlobal();
+
+//13
+{
+let x=10;
+}
+// alert(x); // error
+
+//14
+alert(testVar);
+var testVar="Hoisted";
+// alert(testLet); // error
+let testLet="Not hoisted";
+
+
+// -------- Section 3 --------
+
+//15
+let anon = function(){ alert("Anonymous"); }
+anon();
+
+//16
+let arrow = () => { alert("Arrow function"); }
+arrow();
+
+//17
+let single = x => x*x;
+alert(single(5));
+
+//18
+let expr = function(){ alert("Function expression"); }
+expr();
+
+//19
+let obj = {
+name:"JS",
+normal:function(){ alert(this.name); },
+arrow:()=>{ alert(this.name); }
+};
+obj.normal();
+obj.arrow();
+
+//20
+(function(){ alert("Executed immediately"); })();
+
+
+// -------- Section 4 --------
+
+//21
+function execute(fn){ fn(); }
+execute(()=>alert("Callback executed"));
+
+//22
+function calc(a,b,fn){ alert(fn(a,b)); }
+calc(5,2,(x,y)=>x+y);
+
+//23
+function message(fn){ fn("Hello"); }
+message((msg)=>alert(msg+" User"));
+
+//24
+function delay(fn){
+setTimeout(fn,1000);
+}
+delay(()=>alert("Delayed"));
+
+//25
+function myMap(arr,fn){
+let res=[];
+for(let i=0;i<arr.length;i++){
+res.push(fn(arr[i]));
+}
+return res;
+}
+alert(myMap([1,2,3],x=>x*2));
+
+
+// -------- Section 5 --------
+
+//26
+function addCur(a){
+return function(b){
+return function(c){
+return a+b+c;
+}
+}
+}
+alert(addCur(1)(2)(3));
+
+//27
+let mul = a=>b=>c=>a*b*c;
+alert(mul(2)(3)(4));
+
+//28
+let greet = a=>b=>c=>a+" "+b+" "+c;
+alert(greet("Hello")("Mahesh")("Morning"));
+
+
+// -------- Section 6 --------
+
+//29
+function* gen(){
+yield "One";
+yield "Two";
+yield "Three";
+}
+let g=gen();
+alert(g.next().value);
+
+//30
+for(let v of gen()){
+alert(v);
+}
+
+//31
+function* infinite(){
+let i=1;
+while(true){
+yield i++;
+}
+}
+let inf=infinite();
+alert(inf.next().value);
+
+
+// -------- Section 7 --------
+
+//32
+let arr1=[1,2];
+let arr2=[3,4];
+alert([...arr1,...arr2]);
+
+//33
+let obj1={name:"A",age:20};
+let obj2={...obj1,age:25};
+alert(obj2.age);
+
+//34
+let merged=[...arr1,...arr2,5,6];
+alert(merged);
+
+
+// -------- Section 8 --------
+
+//35
+function sum(...nums){
+return nums.reduce((a,b)=>a+b,0);
+}
+alert(sum(1,2,3,4));
+
+//36
+function show(...args){
+alert(args);
+}
+show(1,2,3);
+
+//37
+function max(...nums){
+return Math.max(...nums);
+}
+alert(max(5,9,2));
+
+
+// -------- Section 9 --------
+
+//38
+let day=2;
+switch(day){
+case 1: alert("Sunday"); break;
+case 2: alert("Monday"); break;
+}
+
+//39
+let op="+";
+let a1=5,b1=3;
+switch(op){
+case "+": alert(a1+b1); break;
+case "-": alert(a1-b1); break;
+case "*": alert(a1*b1); break;
+case "/": alert(a1/b1); break;
+}
+
+//40
+let marks=85;
+if(marks>=90){ alert("A"); }
+else if(marks>=75){ alert("B"); }
+else if(marks>=50){ alert("C"); }
+else{ alert("Fail"); }
+
+</script>
+
+</body>
+</html>
+```
