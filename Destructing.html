@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ES6 Array Practice</title>
+</head>
+<body>
+
+<script>
+
+// -------- Spread & Rest --------
+alert([... [10,20], ...[30,40], 50]);
+
+let a1=[1,2,3];
+let a2=[...a1];
+a2[0]=100;
+alert(a1);
+alert(a2);
+
+let obj1={salary:1000};
+let obj2={salary:2000};
+alert({...obj1,...obj2}.salary);
+
+function sum(...nums){
+return nums.reduce((a,b)=>a+b,0);
+}
+alert(sum(1,2,3,4));
+
+function restDemo(a,b,...rest){
+alert(rest);
+}
+restDemo(1,2,3,4,5);
+
+
+// -------- Destructuring --------
+let [first,,,last]=[5,10,15,20];
+alert(first+" "+last);
+
+let x=10,y=20;
+[x,y]=[y,x];
+alert(x+" "+y);
+
+let arr=[1,[2,[3,[4]]]];
+alert(arr[1][1][1][0]);
+
+let {name:userName,age}= {name:"Mahesh",age:25};
+alert(userName);
+
+let {city="Chennai"}={};
+alert(city);
+
+
+// -------- Basic Array --------
+let arr1=[1,2,3,4,5];
+arr1.push(6,7);
+alert(arr1);
+
+let lastVal=arr1.pop();
+alert(lastVal);
+
+arr1.shift();
+alert(arr1);
+
+arr1.unshift(0);
+alert(arr1);
+
+let arr2=[1,2,3,4,5,6];
+arr2.splice(2,2);
+alert(arr2);
+
+
+// -------- Slice / Splice / Flat --------
+let sal=[1000,2000,3000,4000,5000,6000];
+alert(sal.slice(3,6));
+
+let arr3=[1,2,3,4];
+arr3.splice(1,2,9,9);
+alert(arr3);
+
+let nested=[1,[2,[3,[4]]]];
+alert(nested.flat(Infinity));
+alert(nested.flat());
+
+let arr4=[1,2,5];
+arr4.splice(2,0,3,4);
+alert(arr4);
+
+
+// -------- Searching --------
+let arr5=[10,50,100];
+alert(arr5.includes(100));
+
+alert([1,2,3,4,3].indexOf(3,2));
+alert([1,5,3,5,2].lastIndexOf(5));
+
+alert([1,2,3].every(x=>x>0));
+alert([10,20,60].some(x=>x>50));
+
+
+// -------- Sorting --------
+alert([10,5,100,1].sort((a,b)=>a-b));
+alert([10,5,100,1].sort((a,b)=>b-a));
+
+let emp=[{salary:3000},{salary:1000},{salary:2000}];
+emp.sort((a,b)=>a.salary-b.salary);
+alert(emp.map(e=>e.salary));
+
+let nums=[1,2,3];
+nums.reverse();
+alert(nums);
+
+
+// -------- forEach --------
+[1,2,3].forEach(x=>alert(x));
+let res=[1,2,3].forEach(x=>x*2);
+alert(res);
+
+
+// -------- map --------
+alert([1,2,3].map(x=>x*2));
+alert(["mahesh","nani"].map(x=>x.toUpperCase()));
+
+let emp2=[{salary:100},{salary:200}];
+alert(emp2.map(e=>e.salary));
+
+
+// -------- filter --------
+let emp3=[{salary:100000},{salary:400000}];
+alert(emp3.filter(e=>e.salary>300000).map(e=>e.salary));
+
+alert([1,2,3,4].filter(x=>x%2===0));
+alert(["hello","javascript"].filter(x=>x.length>5));
+
+
+// -------- find --------
+alert([10,60,30].find(x=>x>50));
+
+let emp4=[{salary:100000},{salary:150000}];
+alert(emp4.find(e=>e.salary<200000).salary);
+
+
+// -------- reduce --------
+alert([10,20,30].reduce((a,b)=>a+b));
+alert([10,50,20].reduce((a,b)=>a>b?a:b));
+alert([1,2,3].reduce(c=>c+1,0));
+
+let obj=["a","b"].reduce((acc,val)=>{acc[val]=true;return acc;},{});
+alert(JSON.stringify(obj));
+
+let emp5=[{salary:100},{salary:200}];
+alert(emp5.reduce((a,b)=>a+b.salary,0));
+
+
+// -------- Conversion --------
+alert([1,2,3].toString());
+alert([1,2,3].join(" - "));
+alert("1,2,3".split(","));
+alert([1,[2,3],[4]].flat().toString());
+
+let words=["hello","mahesh","good","morning"];
+alert(words.map(w=>w.toUpperCase()).join(" "));
+
+</script>
+
+</body>
+</html>
