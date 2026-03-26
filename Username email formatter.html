@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>String Tasks</title>
+</head>
+<body>
+
+<h2 id="clock"></h2>
+
+<script>
+
+// -------- Task 1 --------
+let name = " naveen kumar ";
+let formatted = name.trim().toUpperCase().replace(" ","_");
+alert(formatted);
+
+
+// -------- Task 2 --------
+let email = "test@gmail.com";
+
+if(email.includes("@") && email.endsWith(".com")){
+alert("Valid Email");
+}else{
+alert("Invalid Email");
+}
+
+
+// -------- Task 3 --------
+let sentence = "javascript is very powerful language";
+alert(sentence.split(" ").length);
+
+
+// -------- Task 4 --------
+let str = "python python developer";
+let words = str.split(" ");
+words[1] = "javascript";
+alert(words.join(" "));
+
+
+// -------- Task 5 --------
+let password = "Test1234";
+
+let strong = password.length>=8 &&
+/[A-Z]/.test(password) &&
+/[a-z]/.test(password) &&
+/[0-9]/.test(password);
+
+alert(strong ? "Strong" : "Weak");
+
+
+// -------- Task 6 --------
+let text = "hello";
+let reversed = text.split("").reverse().join("");
+alert(reversed);
+
+
+// -------- Task 7 --------
+let year = 2000;
+let month = 5;
+let date = 15;
+
+if(month>=1 && month<=12 && date>=1 && date<=31){
+let d = new Date(year,month-1,date);
+let days=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+alert("You were born on " + days[d.getDay()]);
+}else{
+alert("Invalid Date");
+}
+
+
+// -------- Task 8 --------
+setInterval(()=>{
+let now = new Date();
+document.getElementById("clock").innerText = now.toLocaleTimeString();
+},1000);
+
+
+// -------- Task 9 --------
+let d1 = new Date("2024-01-01");
+let d2 = new Date("2024-01-10");
+
+let diff = Math.abs(d2 - d1);
+let days = diff / (1000*60*60*24);
+
+alert(days);
+
+
+// -------- Task 10 --------
+let word = "javascript";
+let freq = {};
+
+for(let ch of word){
+freq[ch] = (freq[ch] || 0) + 1;
+}
+
+alert(JSON.stringify(freq));
+
+</script>
+
+</body>
+</html>
