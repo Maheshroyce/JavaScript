@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product Dashboard</title>
+  <style>
+    body {
+      font-family: Arial;
+      margin: 20px;
+      background: #f5f5f5;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    input, select, button {
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      transition: 0.3s;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    img {
+      width: 100%;
+      height: 150px;
+      object-fit: contain;
+    }
+
+    .price {
+      background: green;
+      color: white;
+      padding: 5px;
+      border-radius: 5px;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    .error {
+      color: red;
+      text-align: center;
+    }
+
+    .loader {
+      text-align: center;
+      font-size: 20px;
+    }
+
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 400px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Product Dashboard</h1>
+
+<div class="controls">
+  <input type="text" id="search" placeholder="Search...">
+  
+  <button onclick="sortLow()">Low → High</button>
+  <button onclick="sortHigh()">High → Low</button>
+
+  <select id="category" onchange="filterCategory()">
+    <option value="all">All</option>
+    <option value="electronics">Electronics</option>
+    <option value="jewelery">Jewelery</option>
+    <option value="men's clothing">Men</option>
+    <option value="women's clothing">Women</option>
+  </select>
+</div>
+
+<div id="loader" class="loader">Loading...</div>
+<div id="error" class="error"></div>
+<div class="products" id="products"></div>
+
+<!-- Modal -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <h3 id="modalTitle"></h3>
+    <p id="modalDesc"></p>
+    <button onclick="closeModal()">Close</button>
+  </div>
+</div>
+
+<script>
+let allProducts = [];
+let filteredProducts = [];
+
+async function fetchProducts() {
+  try {
+    const res = await fetch("https://fakestoreapi.com/products");
+    const data = await res.json();
+    
+    allProducts = data;
+    filteredProducts = data;
+
+    document.getElementById("loader").style.display = "none";
+    displayProducts(data);
+
+  } catch (err) {
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("error").innerText = "Error loading data";
+  }
+}
+
+function displayProducts(products) {
+  const container = document.getElementById("products");
+  container.innerHTML = "";
+
+  products.forEach(p => {
+    container.innerHTML += `
+      <div class="card">
+        <img src="${p.image}">
+        <h4>${p.title.slice(0,20)}</h4>
+        <p>${p.description.slice(0,60)}...</p>
+        <div class="price">$${p.price}</div>
+        <br><br>
+        <button onclick="viewDetails('${p.title}','${p.description}')">View More</button>
+      </div>
+    `;
+  });
+}
+
+function sortLow() {
+  filteredProducts.sort((a,b)=>a.price-b.price);
+  displayProducts(filteredProducts);
+}
+
+function sortHigh() {
+  filteredProducts.sort((a,b)=>b.price-a.price);
+  displayProducts(filteredProducts);
+}
+
+document.getElementById("search").addEventListener("input", (e)=>{
+  const value = e.target.value.toLowerCase();
+  filteredProducts = allProducts.filter(p =>
+    p.title.toLowerCase().includes(value)
+  );
+  displayProducts(filteredProducts);
+});
+
+function filterCategory() {
+  const cat = document.getElementById("category").value;
+
+  if(cat === "all") {
+    filteredProducts = allProducts;
+  } else {
+    filteredProducts = allProducts.filter(p => p.category === cat);
+  }
+
+  displayProducts(filteredProducts);
+}
+
+function viewDetails(title, desc) {
+  document.getElementById("modal").style.display = "flex";
+  document.getElementById("modalTitle").innerText = title;
+  document.getElementById("modalDesc").innerText = desc;
+}
+
+function closeModal() {
+  document.getElementById("modal").style.display = "none";
+}
+
+fetchProducts();
+</script>
+
+</body>
+</html>
